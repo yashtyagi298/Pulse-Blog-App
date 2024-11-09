@@ -1,0 +1,8 @@
+name = "backend"
+main = "src/index.ts"
+compatibility_date = "2024-11-08"
+
+
+ 
+# we need to remove hash because in wrangler file it is consider as a comment syntax
+[vars]
