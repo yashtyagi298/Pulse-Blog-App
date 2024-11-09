@@ -131,3 +131,31 @@ blogRouter.get('/:id', async (c) => {
     c.json({message:"error while fetching blog post"})
   }
 })
+
+// delete blog post
+blogRouter.delete('/:id',async (c)=>{
+  const prisma =  new PrismaClient({
+    datasourceUrl:c.env.DATABASE_URL,
+  }).$extends(withAccelerate())
+
+  try {
+    const params = c.req.param("id")
+   const blogpost = await prisma.post.findUnique({
+    where:{
+      id:Number(params)
+    }
+   })
+   if(!blogpost){
+    c.status(404)
+    return c.json({message:"blog post not found"})
+   }
+   
+   await prisma.post.delete({
+    where:{id:Number(params)}
+   })
+   return c.json({message:"Deleted Successfully!"})
+  } catch(err){
+     c.status(500)
+     return c.json({message:"error while deleting blog post"})
+  }
+})
