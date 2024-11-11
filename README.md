@@ -83,7 +83,7 @@ npx prisma migrate dev --name init_schema
 
 * It will generate migration folder inside prisma.
 * And then Generate the prisma client
-``` 
+
 
 - Access in your browser at [http://localhost:3000](http://localhost:3000).
 
