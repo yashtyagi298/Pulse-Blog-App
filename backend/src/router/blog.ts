@@ -38,7 +38,7 @@ blogRouter.use('/*',async (c,next)=>{
   
 
 })
-//---------blog
+//---------blog post---
 blogRouter.post('/', async (c) => {
   
     const prisma = new PrismaClient({
@@ -105,7 +105,18 @@ blogRouter.get('/bulk', async (c) => {
         datasourceUrl:c.env.DATABASE_URL
        }).$extends(withAccelerate())
        try {
-        const allPost = await prisma.post.findMany();
+        const allPost = await prisma.post.findMany({
+          select:{
+            content:true,
+            title:true,
+            id:true,
+            author:{
+              select:{
+                name:true
+              }
+            }
+          }
+        });
         return c.json({allPost})
        } catch (error) {
         c.status(411);
@@ -123,9 +134,19 @@ blogRouter.get('/:id', async (c) => {
     const findPost = await prisma.post.findFirst({
         where:{
             id:Number(params)
+        },
+        select:{
+          id:true,
+          title:true,
+          content:true,
+          author:{
+              select:{
+                name:true
+              }
+          }
         }
       })
-      return c.json({findPost})
+      return c.json({onePost:findPost})
   } catch (error) {
     c.status(411);
     c.json({message:"error while fetching blog post"})
