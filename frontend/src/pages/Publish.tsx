@@ -1,7 +1,7 @@
 import axios from "axios"
 import Appbar from "../components/Appbar"
 import { BACKEND_URL } from "../config"
-import { ChangeEvent, ChangeEventHandler, EventHandler, useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { useNavigate } from "react-router-dom";
 
 
@@ -28,7 +28,7 @@ function Publish() {
 }}/>
 <button disabled={loader} onClick={async ()=>{
     setLoader(true);
-   const response= await axios.post(`${BACKEND_URL}/api/v1/blog`,{
+    await axios.post(`${BACKEND_URL}/api/v1/blog`,{
         title,
         content,
       
