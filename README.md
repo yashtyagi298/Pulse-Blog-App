@@ -5,18 +5,18 @@
 ## Tech Stack
 
 ### Frontend
-- **React**: A JavaScript library for building user interfaces, providing a flexible and efficient way to create dynamic web applications.
-- **Zod**: A TypeScript-first schema declaration and validation library, enabling robust type checking and validation of frontend data.
-- **TypeScript**: A statically typed superset of JavaScript that enhances code quality, maintainability, and developer productivity.
-- **JWT (JSON Web Tokens)**: A standard for securely transmitting information between parties as a JSON object, commonly used for authentication in web applications.
+- **React**: A JavaScript library for building user interfaces, providing a flexible and efficient way to create dynamic web applications. [React](https://react.dev/)
+- **Zod**: A TypeScript-first schema declaration and validation library, enabling robust type checking and validation of frontend data. [Zod](https://zod.dev/)
+- **TypeScript**: A statically typed superset of JavaScript that enhances code quality, maintainability, and developer productivity. [TypeScript](https://www.typescriptlang.org)
+- **JWT (JSON Web Tokens)**: A standard for securely transmitting information between parties as a JSON object, commonly used for authentication in web applications. [JWT](https://jwt.io)
 
 ### Backend
-- **Cloudflare Workers**: A serverless execution environment that allows you to run JavaScript code at the edge of the Cloudflare network, providing scalable and efficient backend logic.
-- **Hono**: A minimal, fast, and secure framework for building Cloudflare Workers.
-- **TypeScript**: Leveraged for backend development, ensuring consistent type safety and code integrity across the entire application.
-- **Prisma**: A modern ORM (Object-Relational Mapping) tool that simplifies database access and manipulation, offering type-safe database queries and schema migrations.
-- **PostgreSQL**: A powerful open-source relational database management system, chosen for its reliability, scalability, and extensive feature set.
-- **Aiven**: A managed service provider for PostgreSQL, used for setting up and managing the database.
+- **Cloudflare Workers**: A serverless execution environment that allows you to run JavaScript code at the edge of the Cloudflare network, providing scalable and efficient backend logic.[Cloudflare](https://dash.cloudflare.com/e748095f914069ac14983461ede6dced/workers/services/view/backend/production/deployments)
+- **Hono**: A minimal, fast, and secure framework for building Cloudflare Workers.[Hono](https://hono.dev/docs/api/routing)
+- **TypeScript**: Leveraged for backend development, ensuring consistent type safety and code integrity across the entire application.[Typescript](https://www.typescriptlang.org)
+- **Prisma**: A modern ORM (Object-Relational Mapping) tool that simplifies database access and manipulation, offering type-safe database queries and schema migrations.[Prisma](https://www.prisma.io)
+- **PostgreSQL**: A powerful open-source relational database management system, chosen for its reliability, scalability, and extensive feature set. [postgresql](https://www.postgresql.org)
+- **Aiven**: A managed service provider for PostgreSQL, used for setting up and managing the database.[Avien](https://console.aiven.io/login)
 
 ## Getting Started
 
@@ -35,8 +35,7 @@ cd Pulse-Blog-App
 ```bash
 cd frontend
 npm install
-`
-``
+
 cd frontend
 npm install
 ```
@@ -80,7 +79,7 @@ npm run dev
 
 ```bash
 npx prisma migrate dev --name init_schema
-```bash
+```
 
 * It will generate migration folder inside prisma.
 * And then Generate the prisma client
