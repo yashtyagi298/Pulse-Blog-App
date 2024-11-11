@@ -20,109 +20,87 @@
 
 ## Getting Started
 
-### Clone the Repository
+### 1. Clone the Repository
 To get started, clone the repository using the following command:
-
 ```bash
 git clone https://github.com/yashtyagi298/Pulse-Blog-App.git
+```
+### 2. Navigate to the project directory 
 
-2. Install Dependencies
-Navigate to the project directory and install the necessary dependencies for both the frontend and backend:
-
-bash
-Copy code
+```bash
 cd Pulse-Blog-App
-Frontend
-bash
-Copy code
+```
+### 3. Install dependencies for both the frontend and backend:
+
+```bash
 cd frontend
 npm install
-Backend
-bash
-Copy code
-cd ../backend
+`
+``
+cd frontend
 npm install
-3. Create Environment Files
-Create .env and wrangler.toml files inside the backend directory.
+```
+### 4. Create a .env and wrangler.toml file inside backend.
+###### inside .env  - Use [AIVEN](https://console.aiven.io/) postgres databse
+ ```bash
+  DATABASE_URL="PASTE DATABASE URL"
+  ```
 
-Inside .env:
-Add your Aiven PostgreSQL database URL:
+#### create connection Pool
+ 
+ * Move to PRISMA site create a new Project. Click Enable Accelerate.
+ * Under Database Connection String PASTE THE AIVEN DB URL created initially.
+ * Click ENABLE ACCELERATE
+ * Click Generate API KEY
+ * A URL is generated paste inside wrangler.toml file
+   * It create a POOL url which we give to our backend not the orginal DB url. It help to connect to our database.
 
-env
-Copy code
-DATABASE_URL="PASTE DATABASE URL"
-Inside wrangler.toml:
-Add the following content:
-
-toml
-Copy code
+```bash
 name = "backend"
 compatibility_date = "2023-12-01"
 
 [vars]
 DATABASE_URL="PASTE the PRISMA URL (Connection Pool)"
+
 JWT_SECRET="mytoken"
-4. Set Up Connection Pool
-Visit the Prisma website to create a new project.
-Enable "Accelerate" under the Database Connection String and paste the Aiven DB URL you created earlier.
-Click Enable Accelerate and then click Generate API Key to get the connection pool URL.
-Paste the generated URL inside the wrangler.toml file as shown above.
-5. Running the Development Servers
-Backend Server
-Start the backend server using Cloudflare Workers:
+```
 
-bash
-Copy code
+### 5. Start the backend server using Cloudflare Workers:
+
+```bash
+ npm run dev
+ ```
+
+### 6. Start the frontend development server:
+
+```bash
 npm run dev
-Frontend Development Server
-Start the frontend development server:
+```
+- * **NOTE** If you make changes in the database i.e schema.prisma file you need to migrate using the follwing command to tell the database the the table you had added is been altered.
 
-bash
-Copy code
-npm run dev
-You can access the application in your browser at http://localhost:3000.
-
-6. Database Migrations
-If you make changes to the database schema (e.g., modify schema.prisma), run the following commands:
-
-To migrate the database:
-bash
-Copy code
+```bash
 npx prisma migrate dev --name init_schema
-This will generate a migration folder inside Prisma.
+```bash
 
-To generate the Prisma client:
-bash
-Copy code
-npx prisma generate --no-engine
-7. Deployment
-To deploy your application to Cloudflare Workers, follow these steps:
+* It will generate migration folder inside prisma.
+* And then Generate the prisma client
+``` 
 
-Log in to Wrangler:
-bash
-Copy code
+- Access in your browser at [http://localhost:3000](http://localhost:3000).
+
+- To Deploy
+
+``` bash
 npx wrangler whoami
+
 npx wrangler login
-Deploy the application to Cloudflare Workers:
-bash
-Copy code
+
 npm run deploy
-8. Important Notes
-Cloudflare Workers do not take environment variables from .env file. Instead, they take variables from the wrangler.toml file.
-Cloudflare Workers create multiple instances distributed globally, and when deploying the code, each instance connects to the database. To avoid overloading the database, it's recommended to use a connection pool.
-Additional Information
-This project uses Prisma for database migrations and client generation, Cloudflare Workers for serverless functions, and JWT for authentication and token management.
 
-If you need further assistance or have any questions about setting up or using the application, feel free to reach out or refer to the official documentation for Prisma, Cloudflare Workers, and JWT.
+```
 
-yaml
-Copy code
+- **NOTE** - cloudflare worker not take environment variable from .env file it takes from wrangle.toml file
 
----
-
-This markdown syntax can be directly used for your project’s `README.md` file. It provides a clean structure, starting with an introduction, followed by the tech stack used in the project, setup instructions, and other important notes.
-
-
-
-
-
+* This code snippet demonstrates the usage of Cloudflare Workers and the need for a connection pool when connecting to a database.
+* Cloudflare Workers create multiple instances distributed throughout the world. When deploying the code, each instance connects to the database, which can be inefficient and potentially overload the database.
+* To address this issue, it is recommended to use a connection pool. In this code, the prisma library is used for managing the connection pool and connecting to the database.
